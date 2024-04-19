@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "stack": "jest -t 'stack'",
+    "queue": "jest -t 'queue'"
   },
   "keywords": [],
   "author": "",
