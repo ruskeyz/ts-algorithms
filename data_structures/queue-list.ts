@@ -1,11 +1,5 @@
-class Node<T> {
-  value: T;
-  next: Node<T> | null;
-  constructor(value: T) {
-    this.value = value;
-    this.next = null;
-  }
-}
+import Node from "./node";
+
 export default class Queue<T> {
   first: Node<T> | null;
   last: Node<T> | null;

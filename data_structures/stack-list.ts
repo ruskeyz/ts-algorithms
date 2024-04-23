@@ -1,10 +1,5 @@
-class Node<T> {
-  public prev: Node<T> | null;
-  constructor(public value: T) {
-    this.value = value;
-    this.prev = null;
-  }
-}
+import Node from "./node";
+
 export default class Stack<T> {
   top: Node<T> | null;
   amount: number;
