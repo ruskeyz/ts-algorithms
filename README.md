@@ -2,6 +2,5 @@
 
 ## Data Structures
 - [Stack](data_structures/stack-list.ts)
-Testing: `npm run stack`
 - [Queue](data_structures/queue-list.ts)
-Testing: `npm run queue`
+- [Call Stack Virtual Machine](data_structures/exercise/virtualMachine.ts)
