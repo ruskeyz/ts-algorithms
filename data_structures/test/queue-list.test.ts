@@ -1,4 +1,3 @@
-import exp from "constants";
 import Queue from "../queue-list";
 
 describe("Queue-list", () => {
@@ -14,6 +13,7 @@ describe("Queue-list", () => {
   });
   test("it removes from q", () => {
     const q = new Queue();
+    expect(q.dequeue()).toBeUndefined();
     q.enqueue(1);
     q.enqueue(2);
     expect(q.front()).toBe(1);
@@ -29,5 +29,11 @@ describe("Queue-list", () => {
     expect(q.isEmpty()).toBeFalsy();
     q.dequeue();
     expect(q.isEmpty()).toBeTruthy();
+  });
+  test("Shows value of last in the q", () => {
+    const q = new Queue();
+    expect(q.back()).toBeUndefined();
+    q.enqueue(1);
+    expect(q.back()).toBe(1);
   });
 });

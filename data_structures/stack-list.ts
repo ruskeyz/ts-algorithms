@@ -23,9 +23,9 @@ export default class Stack<T> {
    * Remove an item at the top of the stack.
    */
   pop(): T | undefined {
-    if (this.isEmpty()) {
-      return undefined;
-    }
+    //if (this.isEmpty()) {
+    //return undefined;
+    //}
     const node = this.top;
     if (node) {
       this.top = node.prev;

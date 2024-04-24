@@ -16,6 +16,7 @@ describe("Stack", () => {
 
   test("pop()", () => {
     const s = new Stack();
+    expect(s.pop()).toBeUndefined();
     s.push(100);
     expect(s.length()).toBe(1);
     expect(s.pop()).toBe(100);
