@@ -1,33 +1,11 @@
 import Stack from "../stack-list";
 
-//Virtual Machine without function scope
-//const languageInstructions = `set a 0
-//add a 10
-//sub a 2
-//print a
-//`;
-
-const languageInstructions = `function functionY:
-    sub a 2
-    return
-end
-function functionX: 
-    call functionY 
-    sub a 1
-    return
-end
-set a 0
-add a 10
-sub a 2
-call functionX
-add a 100
-print a`;
 /**
  * Create a Virtual Machine that reads the code in the syntax above
  * The idea is to recreate the call stack procedure of some programming language instructions above https://www.youtube.com/watch?v=Q2sFmqvpBe0
  * @param {T} item The language instructions to be pushed onto the VirtualMachine.
+ * @returns the return object from this.memory
  */
-
 export default class VirtualMachine {
   private instructionArr: string[];
   private functionNameToLineNumberMapping: Record<string, number>;
@@ -50,31 +28,24 @@ export default class VirtualMachine {
       const instructionParts = this.instructionArr[this.lineNumber].split(" ");
 
       let value = 0;
-      let functionIndex = 0;
-      let searchForFunctionKey = "";
       switch (instructionParts[0]) {
         case "function":
           // get the function name to search within array
           const functionName = instructionParts[1].slice(0, -1);
-          searchForFunctionKey = instructionParts.reduce(
-            (acc, curr) => `${acc} ${curr}`
-          );
-          //find the index line of function
-          functionIndex = this.instructionArr.indexOf(searchForFunctionKey);
-
           //save where the function is
-          this.functionNameToLineNumberMapping[functionName] = functionIndex;
+          this.functionNameToLineNumberMapping[functionName] = this.lineNumber;
 
+          //find id of the end of the func
+          const endIdx = this.instructionArr
+            .slice(this.lineNumber)
+            .findIndex((item) => item === "end");
+          //escape function scope before called
+          this.lineNumber = this.lineNumber + endIdx;
           break;
 
         case "call":
-          searchForFunctionKey = instructionParts.reduce(
-            (acc, curr) => `${acc} ${curr}`
-          );
-          functionIndex = this.instructionArr.indexOf(searchForFunctionKey);
           // memorise the index where function call occurred
-          this.stack.push({ lineNumberToReturn: functionIndex });
-
+          this.stack.push({ lineNumberToReturn: this.lineNumber });
           const executeFunction =
             this.functionNameToLineNumberMapping[instructionParts[1]];
 
@@ -97,9 +68,21 @@ export default class VirtualMachine {
           break;
         case "sub":
           value = parseInt(instructionParts[2]);
+          if (!this.memory[instructionParts[1]]) {
+            console.error(
+              `variable ${instructionParts[1]} is not declared, substraction not happened`
+            );
+          }
+
           this.memory[instructionParts[1]] -= value;
           break;
         case "print":
+          if (!this.memory[instructionParts[1]]) {
+            console.error(
+              `variable ${instructionParts[1]} is not declared, cannot print`
+            );
+          }
+
           console.log(
             `VirtualMachine var value: ${this.memory[instructionParts[1]]}`
           );
@@ -113,6 +96,20 @@ export default class VirtualMachine {
     return this.memory;
   }
 }
-
+const languageInstructions = `function functionY:
+    sub a 2
+    return
+end
+function functionX: 
+    call functionY 
+    sub a 1
+    return
+end
+set a 0
+add a 10
+sub a 2
+call functionX
+add a 100
+print a`;
 const v = new VirtualMachine(languageInstructions);
 v.execute();
