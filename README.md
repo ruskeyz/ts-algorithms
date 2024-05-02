@@ -9,7 +9,10 @@
 - [Insertion sort](sorting/insertion-sort.ts)
 - [Merge sort](sorting/merge-sort.ts)
 - [Quick sort](sorting/quick-sort.ts)
+
+
 ![sorting-speed](sorting/sorting-speed.png)
+
 ## Recursion
 - [Factorial](recursion/factorial.ts)
 - [Fibonacci](recursion/fibonacci.ts)
