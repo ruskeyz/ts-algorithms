@@ -14,7 +14,7 @@ function partition(arr: number[], low: number, high: number): number {
   for (let i = low; i < high; i++) {
     if (arr[i] <= pivot) {
       idx++;
-      // swap(arr[i], arr[idx]
+      // swap(arr[i], arr[idx])
       const tmp = arr[i];
       arr[i] = arr[idx];
       arr[idx] = tmp;
@@ -27,7 +27,11 @@ function partition(arr: number[], low: number, high: number): number {
 
   return idx;
 }
+/**
+ * Quick Sort algorithm
+ * @param {number[]} arr
+ * @returns {number[]} sorted array
+ */
 export default function quickSort(arr: number[]): number[] {
   return qs(arr, 0, arr.length - 1);
 }
-console.log(quickSort([10, 16, 8, 12, 15, 6, 3, 9, 5]));
