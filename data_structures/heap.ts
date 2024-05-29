@@ -13,12 +13,12 @@ export default class MinHeap {
     // base case: if parent < value return
     let parentIdx = this.getParent(index);
     let parentValue = this.data[parentIdx];
+    const value = this.data[index];
 
     // if parentValue > value, swap
-    if (parentValue > this.data[index]) {
-      const tmp = this.data[index];
+    if (parentValue > value) {
       this.data[index] = parentValue;
-      parentValue = tmp;
+      this.data[parentIdx] = value;
       this.heapifyUp(parentIdx);
     }
   }
@@ -46,41 +46,31 @@ export default class MinHeap {
   }
 
   // getLeftChild 2i + 1 - left side child
-  private getLeftChild(index: number): number {
-    return 2 * index + 1;
-  }
+  private getLeftChild = (index: number): number => index * 2 + 1;
   //getRightChild 2i + 2 - right side child
-  private getRightChild(index: number): number {
-    return 2 * index + 2;
-  }
-  private getRoot() {
-    if (this.data.length > 0) {
-      return this.data[0];
-    }
-  }
-  private getParent(index: number): number {
-    return Math.floor(index - 1 / 2);
-  }
+  private getRightChild = (index: number): number => index * 2 + 2;
+  private getParent = (index: number): number => Math.floor((index - 1) / 2);
+
   insert(value: number): void {
     this.data[this.length] = value;
     this.heapifyUp(this.length);
     this.length++;
   }
 
-  delete(): number | Error {
+  delete(): number {
     //remove the head of MinHeap, and swap with the last one
-    const head = this.data[0];
+    const res = this.data[0];
     const last = this.data[this.length];
-    this.length--;
 
+    this.length--;
     if (this.length === 0) {
       this.data = [];
-      return head;
+      return res;
     }
 
     this.data[0] = last;
 
     this.heapifyDown(0);
-    return head;
+    return res;
   }
 }
