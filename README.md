@@ -5,7 +5,7 @@
 - [Queue](data_structures/queue-list.ts)
 - [Call Stack Virtual Machine](data_structures/exercise/virtualMachine.ts)
 - [Heap](data_structures/heap.ts)
-- [hashMap](data_structures/hashMap.ts)
+- [HashMap](data_structures/hashMap.ts)
 
 ## Sorting
 - [Bubble sort](sorting/bubble-sort.ts)
