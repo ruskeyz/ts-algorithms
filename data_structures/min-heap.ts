@@ -1,6 +1,6 @@
 export default class MinHeap {
   public length: number;
-  private data: number[];
+  data: number[];
   constructor() {
     this.data = [];
     this.length = 0;
@@ -10,7 +10,6 @@ export default class MinHeap {
     if (index === 0) {
       return;
     }
-    // base case: if parent < value return
     let parentIdx = this.getParent(index);
     let parentValue = this.data[parentIdx];
     const value = this.data[index];

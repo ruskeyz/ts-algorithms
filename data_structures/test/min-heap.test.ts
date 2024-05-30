@@ -1,4 +1,4 @@
-import MinHeap from "../heap";
+import MinHeap from "../min-heap";
 
 describe("Heap", () => {
   test("Heap insert", () => {
@@ -12,6 +12,7 @@ describe("Heap", () => {
     h.insert(1);
     h.insert(8);
     h.insert(7);
+    console.log(h.data, "data");
     expect(h.length).toBe(8);
     expect(h.delete()).toEqual(1);
     let i = 7;

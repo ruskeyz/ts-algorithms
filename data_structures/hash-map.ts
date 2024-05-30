@@ -1,13 +1,13 @@
-export default class hashMap {
+export default class HashMap<K extends string, V> {
   arr: any[];
-  private numberOfItems: number;
+  private length: number;
   constructor() {
     this.arr = new Array(3);
-    this.numberOfItems = 0;
+    this.length = 0;
   }
-  protected multiplyPrimeInt = (int: number): number => int * 2 + 1;
-  protected resize = () => {
-    const newArr = new Array(this.multiplyPrimeInt(this.numberOfItems));
+  private multiplyPrimeInt = (int: number): number => int * 2 + 1;
+  private resize = () => {
+    const newArr = new Array(this.multiplyPrimeInt(this.length));
     this.arr.forEach((item) => {
       if (item) {
         item.forEach(([key, value]) => {
@@ -22,17 +22,16 @@ export default class hashMap {
     });
     this.arr = newArr;
   };
-  protected hashStringToInt = (key: string, arrLength: number): number => {
+  private hashStringToInt = (key: K, arrLength: number): number => {
     let hash = 17;
     // Creating a hash
-    // for each character in the key
     for (let i = 0; i < key.length; i++) {
       hash = (13 * hash * key.charCodeAt(i)) % arrLength;
     }
     return hash;
   };
 
-  getItem = (key: string) => {
+  getItem = (key: K) => {
     const idx = this.hashStringToInt(key, this.arr.length);
     if (!this.arr[idx]) {
       return null;
@@ -41,10 +40,10 @@ export default class hashMap {
     return res;
   };
 
-  setItem = (key: string, value: any) => {
-    this.numberOfItems++;
-    const loadFactor = this.numberOfItems / this.arr.length;
-    if (loadFactor > 0.8) {
+  setItem = (key: K, value: V) => {
+    this.length++;
+    const resizeRatio = this.length / this.arr.length;
+    if (resizeRatio > 0.8) {
       // double the array
       this.resize();
     }
