@@ -22,7 +22,7 @@ describe("Merge sort", () => {
   });
 
   test("build graphs of the algorithm", () => {
-    const arr = [10, 100, 1000, 5000];
+    const arr = [10, 100, 200, 500, 1000];
     const res: number[] = [];
     //res.push(arr);
     for (let i = 0; i < arr.length; i++) {

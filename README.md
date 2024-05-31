@@ -4,8 +4,9 @@
 - [Stack](data_structures/stack-list.ts)
 - [Queue](data_structures/queue-list.ts)
 - [Call Stack Virtual Machine](data_structures/exercise/virtualMachine.ts)
-- [Heap](data_structures/heap.ts)
-- [HashMap](data_structures/hashMap.ts)
+- [Min Heap](data_structures/min-heap.ts)
+- [Min Heap](data_structures/max-heap.ts)
+- [HashMap](data_structures/hash-map.ts)
 
 ## Sorting
 - [Bubble sort](sorting/bubble-sort.ts)
