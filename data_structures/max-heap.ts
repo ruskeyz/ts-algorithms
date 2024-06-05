@@ -26,13 +26,13 @@ export default class MaxHeap {
     }
   };
   heapifyDown = (idx: number): void => {
+    let lIdx = this.getLeftChild(idx);
+    let rIdx = this.getRightChild(idx);
     //base case
-    if (idx >= this.length) {
+    if (idx >= this.length || lIdx >= this.length) {
       return;
     }
     // iterate
-    let lIdx = this.getLeftChild(idx);
-    let rIdx = this.getRightChild(idx);
     let lV = this.data[lIdx];
     let rV = this.data[rIdx];
     let v = this.data[idx];
@@ -60,14 +60,14 @@ export default class MaxHeap {
   delete = () => {
     //swap last and first
     let res = this.data[0];
-    let last = this.data[this.length];
+    let last = this.data[this.length - 1];
 
+    this.length--;
     if (this.length === 0) {
       this.data = [];
       return res;
     }
     this.data[0] = last;
-    this.length--;
     this.heapifyDown(0);
     return res;
   };
