@@ -2,7 +2,7 @@
  * Create a priority queue with max value at the root
  */
 export default class MaxHeap {
-  private data: number[];
+  data: number[];
   length: number;
   constructor() {
     this.data = [];

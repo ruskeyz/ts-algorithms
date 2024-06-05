@@ -1,8 +1,8 @@
-import MinHeap from "../min-heap";
+import MaxHeap from "../max-heap";
 
-describe("Min Heap", () => {
+describe("Max Heap", () => {
   test("Heap insert", () => {
-    const h = new MinHeap();
+    const h = new MaxHeap();
     expect(h.length).toEqual(0);
     h.insert(5);
     h.insert(3);
@@ -14,7 +14,7 @@ describe("Min Heap", () => {
     h.insert(7);
     console.log(h.data, "data");
     expect(h.length).toBe(8);
-    expect(h.delete()).toEqual(1);
+    expect(h.delete()).toEqual(420);
     let i = 7;
     while (i > 0) {
       h.delete();

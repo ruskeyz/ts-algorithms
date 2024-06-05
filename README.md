@@ -5,7 +5,7 @@
 - [Queue](data_structures/queue-list.ts)
 - [Call Stack Virtual Machine](data_structures/exercise/virtualMachine.ts)
 - [Min Heap](data_structures/min-heap.ts)
-- [Min Heap](data_structures/max-heap.ts)
+- [Max Heap](data_structures/max-heap.ts)
 - [HashMap](data_structures/hash-map.ts)
 
 ## Sorting
@@ -24,5 +24,3 @@
 - [Factorial](recursion/factorial.ts)
 - [Fibonacci](recursion/fibonacci.ts)
 - [Maze Solver](recursion/mazeSolver.ts)
-
-
