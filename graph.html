@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<div id="container"></div>
+<div id="my_dataviz"></div>
+<script src="https://d3js.org/d3.v7.js"></script>
+<script type="module">
+// set the dimensions and margins of the graph
+const margin = { top: 10, right: 30, bottom: 30, left: 60 };
+const width = 1200 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
+
+// set x & y axes
+let x = d3.scaleLinear().range([0, width]);
+const y = d3.scaleLinear().range([height, 0]);
+
+// create svg element
+const svg = d3
+  .select("#my_dataviz")
+  .append("svg")
+  .style("background-color", "#F7F8FA")
+  .attr("width", width + margin.right + margin.left)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+//dataset
+const data = {
+  "merge-sort": [
+    { number: 0, value: 0 },
+    { number: 10, value: 0.014708999999925254 },
+    { number: 100, value: 0.18745899999998983 },
+    { number: 200, value: 0.3708750000000691 },
+    { number: 500, value: 0.9747499999999718 },
+    { number: 1000, value: 2.120249999999942 },
+  ],
+  "bubble-sort": [
+    { number: 0, value: 0 },
+    { number: 10, value: 0.007832999999891399 },
+    { number: 100, value: 0.5532080000000406 },
+    { number: 200, value: 1.96612499999992 },
+    { number: 500, value: 2.3979580000000169 },
+    { number: 1000, value: 3.5193329999999605 },
+  ],
+  "quick-sort": [
+    { number: 0, value: 0 },
+    { number: 10, value: 0.01145900000005895 },
+    { number: 100, value: 0.13445799999999508 },
+    { number: 200, value: 0.2491250000000491 },
+    { number: 500, value: 0.710582999999815 },
+    { number: 1000, value: 1.5929579999999532 },
+  ],
+  "insertion-sort": [
+    { number: 0, value: 0 },
+    { number: 10, value: 0.007082999999965978 },
+    { number: 100, value: 0.4032919999999649 },
+    { number: 200, value: 1.7477499999999964 },
+    { number: 500, value: 2.8727499999999964 },
+    { number: 1000, value: 3.087916999999834 },
+  ],
+};
+
+const flatData = Object.values(data).flat();
+
+// define x&y domains
+x.domain([0, d3.max(flatData, (d) => d.number)]);
+y.domain([0, d3.max(flatData, (d) => d.value)]);
+
+//add x axis
+svg
+  .append("g")
+  .attr("transform", `translate(0, ${height})`)
+  .call(d3.axisBottom(x));
+//add y axis
+svg.append("g").call(d3.axisLeft(y));
+
+//create a line
+const line = d3
+  .line()
+  .x((d) => x(d.number))
+  .y((d) => y(d.value));
+
+const colors = ["red", "blue", "green", "purple"];
+let i = 0;
+let colorsToKeys = [];
+Object.keys(data).forEach((key, index) => {
+  // Ensure there's a color available for the key
+  if (colors[index]) {
+    colorsToKeys.push({
+      name: key,
+      color: colors[index],
+    });
+  } else {
+    // handle the possible lack of colors
+    colorsToKeys.push({
+      name: key,
+      color: colors[index % colors.length],
+    });
+  }
+});
+Object.values(data).map((sort) => {
+  // add the lines
+  svg
+    .append("path")
+    .datum(sort)
+    .attr("fill", "none")
+    .attr("stroke", colors[i])
+    .attr("stroke-width", 1)
+    .attr("d", line);
+  // add value labels
+  svg
+    .selectAll(".text")
+    .data(sort)
+    .enter()
+    .append("text")
+    .style("fill", colorsToKeys[i].color)
+    .attr("class", "label")
+    .attr("x", (d) => x(d.number))
+    .attr("y", (d) => y(d.value) + 10)
+    .attr("dy", ".75em")
+    .text((d) => Math.round(d.value * 100) / 100);
+  // add name labels
+  svg
+    .append("text")
+    .attr("x", 0 + margin.left)
+    .attr("y", margin.top + i * 20)
+    .style("fill", colorsToKeys[i].color)
+    .text(`- ${colorsToKeys[i].name}`);
+  i++;
+});
+//add title
+svg
+  .append("text")
+  .attr("x", width / 2)
+  .attr("y", margin.top)
+  .attr("text-anchor", "middle")
+  .style("font-size", "16px")
+  .style("text-decoration", "underline")
+  .text("Speed of sorting algorithms");
+
+</script>
