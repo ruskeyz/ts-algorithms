@@ -29,6 +29,7 @@ export default class BinarySearchTree {
   search(value: number) {
     return this.searchNode(this.head, value);
   }
+
   private findMinNode(current: BinaryNode<number>) {
     if (!current.left) {
       return current.value;
@@ -42,6 +43,7 @@ export default class BinarySearchTree {
       return this.findMinNode(this.head);
     }
   }
+
   private findMaxNode(current: BinaryNode<number>) {
     if (!current.right) {
       return current.value;
@@ -55,14 +57,7 @@ export default class BinarySearchTree {
       return this.findMaxNode(this.head);
     }
   }
-  insert(value: number): void {
-    const newNode = new BinaryNode(value);
-    if (!this.head) {
-      this.head = newNode;
-    } else {
-      this.insertNode(this.head, newNode);
-    }
-  }
+
   private insertNode(
     node: BinaryNode<number>,
     newNode: BinaryNode<number>,
@@ -81,8 +76,39 @@ export default class BinarySearchTree {
       }
     }
   }
-
-  delete(value: number) {}
+  insert(value: number): void {
+    const newNode = new BinaryNode(value);
+    if (!this.head) {
+      this.head = newNode;
+    } else {
+      this.insertNode(this.head, newNode);
+    }
+  }
+  private deleteNode(
+    current: BinaryNode<number> | null,
+    value: number,
+  ): BinaryNode<number> | null {
+    if (!current) {
+      return current;
+    }
+    if (value < current.value) {
+      current.left = this.deleteNode(current.left, value);
+    } else if (value > current.value) {
+      current.right = this.deleteNode(current.right, value);
+    } else {
+      if (!current.left) {
+        return current.right;
+      } else if (!current.right) {
+        return current.left;
+      }
+      current.value = this.findMinNode(current.right);
+      current.right = this.deleteNode(current.right, current.value);
+    }
+    return current;
+  }
+  delete(value: number): void {
+    this.head = this.deleteNode(this.head, value);
+  }
 
   private walkTree(
     current: BinaryNode<number> | null,
@@ -103,6 +129,7 @@ export default class BinarySearchTree {
     return this.walkTree(this.head, []);
   }
 }
+
 const t = new BinarySearchTree();
 t.insert(2);
 t.insert(1);
@@ -110,6 +137,9 @@ t.insert(7);
 t.insert(33);
 t.insert(33);
 t.insert(100);
+t.delete(100);
+t.delete(33);
+t.delete(33);
 console.log(t.search(5), "search");
 console.log(t.findMin(), "findMin");
 console.log(t.findMax(), "findMax");
