@@ -8,6 +8,7 @@
 - [Max Heap](data_structures/max-heap.ts)
 - [Hash Table](data_structures/hash-map.ts)
 - [Tree](data_structures/tree.ts)
+- [Trie](data_structures/trie.ts)
 
 ## Sorting
 - [Bubble sort](sorting/bubble-sort.ts)
@@ -26,4 +27,4 @@
 - [Factorial](recursion/factorial.ts)
 - [Fibonacci](recursion/fibonacci.ts)
 - [Maze Solver](recursion/maze-solver.ts)
-- [Sudoku Solver](recursion/sudoku-solver.ts
+- [Sudoku Solver](recursion/sudoku-solver.ts)
