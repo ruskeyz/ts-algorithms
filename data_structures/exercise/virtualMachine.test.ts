@@ -1,4 +1,3 @@
-import exp from "constants";
 import VirtualMachine from "./virtualMachine";
 
 describe("Virtual Machine", () => {
@@ -35,7 +34,7 @@ describe("Virtual Machine", () => {
 
     v.execute();
     expect(logSpy).toHaveBeenCalledWith(
-      `variable m is not declared, substraction not happened`
+      `variable m is not declared, substraction not happened`,
     );
   });
   test("test that virtualMachine cannot print undeclared variable", () => {
@@ -46,7 +45,7 @@ describe("Virtual Machine", () => {
     const logSpy = jest.spyOn(console, "error");
     v.execute();
     expect(logSpy).toHaveBeenCalledWith(
-      `variable nada is not declared, cannot print`
+      `variable nada is not declared, cannot print`,
     );
   });
   test("test that virtualMachine can print code", () => {

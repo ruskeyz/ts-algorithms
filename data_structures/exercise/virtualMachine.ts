@@ -70,7 +70,7 @@ export default class VirtualMachine {
           value = parseInt(instructionParts[2]);
           if (!this.memory[instructionParts[1]]) {
             console.error(
-              `variable ${instructionParts[1]} is not declared, substraction not happened`
+              `variable ${instructionParts[1]} is not declared, substraction not happened`,
             );
           }
 
@@ -79,12 +79,12 @@ export default class VirtualMachine {
         case "print":
           if (!this.memory[instructionParts[1]]) {
             console.error(
-              `variable ${instructionParts[1]} is not declared, cannot print`
+              `variable ${instructionParts[1]} is not declared, cannot print`,
             );
           }
 
           console.log(
-            `VirtualMachine var value: ${this.memory[instructionParts[1]]}`
+            `VirtualMachine var value: ${this.memory[instructionParts[1]]}`,
           );
           break;
 
