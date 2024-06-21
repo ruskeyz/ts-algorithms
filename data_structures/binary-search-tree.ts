@@ -138,7 +138,7 @@ export default class BinarySearchTree {
     if (!current) {
       return true;
     }
-    let v = current.value;
+    const v = current.value;
     if (v <= s || v >= b) {
       return false;
     }

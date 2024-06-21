@@ -6,6 +6,7 @@ describe("Binary Search Tree", () => {
     const tree = new BinarySearchTree();
     tree.head = new BinaryNode(10);
     expect(tree.validate()).toBeTruthy();
+    expect(tree.validate()).toBeTruthy();
     tree.head.left = new BinaryNode(7);
     expect(tree.validate()).toBeTruthy();
     tree.head.right = new BinaryNode(14);
