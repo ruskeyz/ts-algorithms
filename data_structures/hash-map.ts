@@ -1,13 +1,13 @@
 export default class HashMap<K extends string, V> {
-  arr: any[];
+  arr: Array<Array<[K, V]> | null>;
   private length: number;
   constructor() {
-    this.arr = new Array(3);
+    this.arr = new Array(3).fill(null);
     this.length = 0;
   }
   private multiplyPrimeInt = (int: number): number => int * 2 + 1;
   private resize = () => {
-    const newArr = new Array(this.multiplyPrimeInt(this.length));
+    const newArr = new Array(this.multiplyPrimeInt(this.length)).fill(null);
     this.arr.forEach((item) => {
       if (item) {
         item.forEach(([key, value]) => {
@@ -24,35 +24,33 @@ export default class HashMap<K extends string, V> {
   };
   private hashStringToInt = (key: K, arrLength: number): number => {
     let hash = 17;
-    // Creating a hash
     for (let i = 0; i < key.length; i++) {
-      hash = (13 * hash * key.charCodeAt(i)) % arrLength;
+      hash = (13 * hash + key.charCodeAt(i)) % arrLength;
     }
     return hash;
   };
 
-  getItem = (key: K) => {
+  getItem = (key: K): V | null => {
     const idx = this.hashStringToInt(key, this.arr.length);
     if (!this.arr[idx]) {
       return null;
     }
-    const res = this.arr[idx].find((x: string) => x[0] === key)[1];
-    return res;
+    const res = this.arr[idx]?.find((x) => x[0] === key);
+    return res ? res[1] : null;
   };
 
   setItem = (key: K, value: V) => {
     this.length++;
     const resizeRatio = this.length / this.arr.length;
     if (resizeRatio > 0.8) {
-      // double the array
       this.resize();
     }
     const idx = this.hashStringToInt(key, this.arr.length);
     if (this.arr[idx]) {
-      this.arr[idx].push([key, value]);
+      this.arr[idx]?.push([key, value]);
     } else {
       this.arr[idx] = [[key, value]];
     }
-    return this.arr[idx].find((x: string) => x[0] === key)[1];
+    return value;
   };
 }
