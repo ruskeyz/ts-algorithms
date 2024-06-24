@@ -1,6 +1,7 @@
 import BinaryNode from "../binary-node";
 import BinarySearchTree from "../binary-search-tree";
 import BinarySearchTreeValidator from "../exercise/bst-validator";
+import BSTHeightCalculator from "../exercise/bst-calculate-height";
 
 describe("Binary Search Tree", () => {
   test("Inserts and traverses the tree according to BST condition", () => {
@@ -55,5 +56,13 @@ describe("Binary Search Tree", () => {
     expect(tree.validate()).toBeTruthy();
     tree.head.right.left = new BinaryNode(9);
     expect(tree.validate()).toBeFalsy();
+  });
+  it("Calculates the height of the tree", () => {
+    const t = new BSTHeightCalculator();
+    t.insert(2);
+    t.insert(4);
+    t.insert(6);
+    t.insert(7);
+    expect(t.getHeight()).toBe(4);
   });
 });
