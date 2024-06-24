@@ -129,47 +129,4 @@ export default class BinarySearchTree {
   traverse(): number[] {
     return this.walkTree(this.head, []);
   }
-  private validateNode(
-    current: BinaryNode<number> | null,
-    s: number,
-    b: number,
-  ) {
-    // base
-    if (!current) {
-      return true;
-    }
-    const v = current.value;
-    if (v <= s || v >= b) {
-      return false;
-    }
-    const leftOk = this.validateNode(current.left, s, current.value);
-    const rightOk = this.validateNode(current.right, current.value, b);
-
-    return leftOk && rightOk;
-  }
-  validate(): boolean {
-    const s = -Infinity;
-    const b = Infinity;
-    if (!this.head) {
-      return false;
-    } else {
-      return this.validateNode(this.head, s, b);
-    }
-  }
 }
-
-const t = new BinarySearchTree();
-t.insert(2);
-t.insert(1);
-t.insert(7);
-t.insert(33);
-t.insert(33);
-t.insert(100);
-t.delete(100);
-t.delete(33);
-t.delete(33);
-console.log(t.search(5), "search");
-console.log(t.findMin(), "findMin");
-console.log(t.findMax(), "findMax");
-console.log(t.traverse());
-console.log(t);
