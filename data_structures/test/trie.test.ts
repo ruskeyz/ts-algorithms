@@ -1,4 +1,4 @@
-import HashMap from "../hash-map";
+import { text } from "stream/consumers";
 import Trie from "../trie";
 
 function makeid(length: number) {
@@ -13,25 +13,34 @@ function makeid(length: number) {
   }
   return result;
 }
-interface Map<T> {
-  set: (k: string, v: T) => void;
-  get: (k: string) => T | null;
-}
 describe("Trie", () => {
-  test("It inserts correctly", () => {
-    const storages: Array<Map<string>> = [
-      new Trie<string>(),
-      // new HashMap<string, string>(),
-    ];
-    for (const keyValueStorage of storages) {
-      for (let stringLength = 0; stringLength < 20; stringLength++) {
-        for (let i = 0; i < 1000; i++) {
-          const k = makeid(stringLength);
-          const v = makeid(stringLength);
-          keyValueStorage.set(k, v);
-          expect(keyValueStorage.get(k)).toStrictEqual(v);
-        }
+  test("It inserts chars correctly", () => {
+    const t = new Trie<string>();
+    for (let stringLength = 0; stringLength < 20; stringLength++) {
+      for (let i = 0; i < 1000; i++) {
+        const k = makeid(stringLength);
+        const v = makeid(stringLength);
+        t.set(k, v);
+        expect(t.get(k)).toStrictEqual(v);
       }
     }
+  });
+  test("it deletes non-linked chars correctly", () => {
+    const trie = new Trie();
+    trie.set("google", "1234");
+    trie.delete("404");
+    expect(trie.get("google")).toBe("1234");
+    trie.delete("goo");
+    expect(trie.get("google")).toBe("1234");
+    trie.delete("google");
+    expect(trie.get("google")).toBeNull();
+  });
+  test("it deletes linked chars correctly", () => {
+    const trie = new Trie();
+    trie.set("google", "1234");
+    trie.set("googles", "456");
+    trie.delete("google");
+    expect(trie.get("google")).toBeNull();
+    expect(trie.get("googles")).toStrictEqual("456");
   });
 });
