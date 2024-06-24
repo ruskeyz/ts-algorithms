@@ -30,7 +30,7 @@ export default class HashMap<K extends string, V> {
     return hash;
   };
 
-  getItem = (key: K): V | null => {
+  get = (key: K): V | null => {
     const idx = this.hashStringToInt(key, this.arr.length);
     if (!this.arr[idx]) {
       return null;
@@ -39,7 +39,7 @@ export default class HashMap<K extends string, V> {
     return res ? res[1] : null;
   };
 
-  setItem = (key: K, value: V) => {
+  set = (key: K, value: V) => {
     this.length++;
     const resizeRatio = this.length / this.arr.length;
     if (resizeRatio > 0.8) {
@@ -53,4 +53,7 @@ export default class HashMap<K extends string, V> {
     }
     return value;
   };
+  //TODO
+  size = () => {};
+  delete = () => {};
 }
