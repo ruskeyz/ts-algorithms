@@ -16,7 +16,6 @@ export default class Queue<T> {
    * @return {number} The new length of the queue.
    */
   enqueue(item: T): number {
-    // xx
     const newNode = new Node(item);
     if (this._length === 0) {
       this.first = newNode;
@@ -34,21 +33,16 @@ export default class Queue<T> {
    * @return {T | undefined} The item at the front of the queue if it is not empty, `undefined` otherwise.
    */
   dequeue(): T | undefined {
-    // ...
     if (!this.first) {
       return undefined;
     }
-    // 0
-    if (this._length === 1) {
-      this.last = null;
-    }
-    // 0 -> 0
     const firstNode = this.first;
     this.first = this.first.next;
     this._length--;
-    if (this.first) {
-      return firstNode.value;
+    if (this._length === 0) {
+      this.last = null;
     }
+    return firstNode.value;
   }
 
   /**
@@ -56,10 +50,7 @@ export default class Queue<T> {
    * @return {boolean} `true` if the queue has no items, `false` otherwise.
    */
   isEmpty(): boolean {
-    if (this._length === 0) {
-      return true;
-    }
-    return false;
+    return this._length === 0;
   }
 
   /**
