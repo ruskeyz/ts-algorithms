@@ -9,6 +9,8 @@
 - [Hash Table](data_structures/hash-map.ts)
 - [Tree](data_structures/tree.ts)
 - [Trie](data_structures/trie.ts)
+- [Binary Search Tree](data_structures/binary-search-tree.ts)
+- [Graph](data_structures/graph.ts)
 
 ## Sorting
 - [Bubble sort](sorting/bubble-sort.ts)
