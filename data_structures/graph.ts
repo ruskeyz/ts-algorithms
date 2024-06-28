@@ -12,11 +12,35 @@ export default class Graph {
       this.edgeMap.set(key, true);
     });
   }
-
+  /**
+   * Perform a depth first search with start vertex, end vertex as parameters
+   */
+  depthFirstSearch(startV: number, endV: number): number[] {
+    let res: ReturnType<typeof this.depthFirstSearch> = [];
+    const explored = new Set<number>();
+    // base case
+    if (startV === endV) {
+      res.push(startV);
+      return res;
+    }
+    explored.add(startV);
+    for (let i = 0; i < this.vertexCount; i++) {
+      if (!explored.has(i) && this.isConnected(startV, i)) {
+        res = this.depthFirstSearch(i, endV);
+        if (res.length > 0) {
+          res.unshift(startV);
+          return res;
+        }
+      }
+    }
+    return res;
+  }
+  /*
+   * Perform a breadth first search using v1 as the start vertex, and v2 as the goal vertex
+   */
   breadthFirstSearch(v1: number, v2: number): number[] {
     const q = new Queue<number>();
     const childToParentMapping = new Map<number, number>(); // child, parent
-    // const explored = new Map<number, boolean>(); // vertex, bool
     const explored = new Set<number>();
     const res: ReturnType<typeof this.breadthFirstSearch> = [];
 
@@ -59,16 +83,3 @@ export default class Graph {
     return s.size;
   }
 }
-
-const edges = [
-  [0, 1],
-  [0, 3],
-  [0, 2],
-  [0, 4],
-  [4, 5],
-  [4, 6],
-  [6, 7],
-];
-const g = new Graph(edges);
-console.log(g.edgeMap, "chop");
-console.log(g.breadthFirstSearch(0, 7));

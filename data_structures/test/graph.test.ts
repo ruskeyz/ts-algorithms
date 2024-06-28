@@ -28,4 +28,8 @@ describe("Graph", () => {
     const g = new Graph(edges);
     expect(g.breadthFirstSearch(0, 7)).toStrictEqual([0, 4, 6, 7]);
   });
+  test("it performs a DFS search", () => {
+    const g = new Graph(edges);
+    expect(g.depthFirstSearch(0, 7)).toStrictEqual([0, 4, 6, 7]);
+  });
 });
