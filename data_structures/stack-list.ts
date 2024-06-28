@@ -22,10 +22,7 @@ export default class Stack<T> {
   /**
    * Remove an item at the top of the stack.
    */
-  pop(): T | undefined {
-    //if (this.isEmpty()) {
-    //return undefined;
-    //}
+  pop(): T {
     const node = this.top;
     if (node) {
       this.top = node.prev;
@@ -33,9 +30,8 @@ export default class Stack<T> {
       this.amount--;
       return node.value;
     }
-    return undefined;
+    throw new Error("Cannot pop from an empty stack.");
   }
-
   /**
    * Determines if the stack is empty.
    */
