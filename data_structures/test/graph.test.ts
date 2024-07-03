@@ -1,4 +1,5 @@
 import Graph from "../graph";
+import GraphW, { WeightedAdjacencyList } from "../graphW";
 
 const edges = [
   [0, 1],
@@ -9,6 +10,30 @@ const edges = [
   [4, 6],
   [6, 7],
 ];
+const list2: WeightedAdjacencyList = [];
+
+//     >(1)<--->(4) ---->(5)
+//    /          |       /|
+// (0)     ------|------- |
+//    \   v      v        v
+//     >(2) --> (3) <----(6)
+list2[0] = [
+  { to: 1, weight: 3 },
+  { to: 2, weight: 1 },
+];
+list2[1] = [{ to: 4, weight: 1 }];
+list2[2] = [{ to: 3, weight: 7 }];
+list2[3] = [];
+list2[4] = [
+  { to: 1, weight: 1 },
+  { to: 3, weight: 5 },
+  { to: 5, weight: 2 },
+];
+list2[5] = [
+  { to: 2, weight: 18 },
+  { to: 6, weight: 1 },
+];
+list2[6] = [{ to: 3, weight: 1 }];
 describe("Graph", () => {
   test("it implements a graph", () => {
     const pass = {
@@ -31,5 +56,10 @@ describe("Graph", () => {
   test("it performs a DFS search", () => {
     const g = new Graph(edges);
     expect(g.depthFirstSearch(0, 7)).toStrictEqual([0, 4, 6, 7]);
+  });
+  test("it implements a weighted graph BFS", () => {
+    const g = new GraphW(list2);
+    expect(g.bfs(0, 6)).toStrictEqual({ path: [0, 1, 4, 5, 6], dist: 7 });
+    expect(g.bfs(6, 0)).toEqual(null);
   });
 });
