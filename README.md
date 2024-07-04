@@ -11,6 +11,7 @@
 - [Trie](data_structures/trie.ts)
 - [Binary Search Tree](data_structures/binary-search-tree.ts)
 - [Graph](data_structures/graph.ts)
+- [Weighted List Graph](data_structures/graphW.ts)
 
 ## Sorting
 - [Bubble sort](sorting/bubble-sort.ts)
