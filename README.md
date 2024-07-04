@@ -12,6 +12,7 @@
 - [Binary Search Tree](data_structures/binary-search-tree.ts)
 - [Graph](data_structures/graph.ts)
 - [Weighted List Graph](data_structures/graphW.ts)
+- [Weighted Matrix Graph](data_structures/graphMatrix.ts)
 
 ## Sorting
 - [Bubble sort](sorting/bubble-sort.ts)

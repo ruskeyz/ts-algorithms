@@ -1,4 +1,5 @@
 import Graph from "../graph";
+import GraphMatrix, { WeightedAdjacencyMatrix } from "../graphMatrix";
 import GraphW, { WeightedAdjacencyList } from "../graphW";
 
 const edges = [
@@ -34,6 +35,22 @@ list2[5] = [
   { to: 6, weight: 1 },
 ];
 list2[6] = [{ to: 3, weight: 1 }];
+
+//     >(1)<--->(4) ---->(5)
+//    /          |       /|
+// (0)     ------|------- |
+//    \   v      v        v
+//     >(2) --> (3) <----(6)
+export const matrix: WeightedAdjacencyMatrix = [
+  [0, 3, 1, 0, 0, 0, 0], // 0
+  [0, 0, 0, 0, 1, 0, 0], // 1
+  [0, 0, 7, 0, 0, 0, 0], // 2
+  [0, 0, 0, 0, 0, 0, 0], // 3
+  [0, 1, 0, 5, 0, 2, 0], // 4
+  [0, 0, 18, 0, 0, 0, 1], //5
+  [0, 0, 0, 1, 0, 0, 1], // 6
+];
+
 describe("Graph", () => {
   test("it implements a graph", () => {
     const pass = {
@@ -60,6 +77,12 @@ describe("Graph", () => {
   test("it implements a weighted graph BFS", () => {
     const g = new GraphW(list2);
     expect(g.bfs(0, 6)).toStrictEqual({ path: [0, 1, 4, 5, 6], dist: 7 });
+    expect(g.bfs(6, 0)).toEqual(null);
+  });
+  test("It implements breadth first search on a graph matrix", () => {
+    const g = new GraphMatrix(matrix);
+
+    expect(g.bfs(0, 6)).toEqual([0, 1, 4, 5, 6]);
     expect(g.bfs(6, 0)).toEqual(null);
   });
 });
