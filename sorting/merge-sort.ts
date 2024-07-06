@@ -32,7 +32,7 @@ function merge(left: number[], right: number[]) {
       rightTraverse++;
     }
   }
-
+  // merge any remaining pieces from left array sliced from leftTraverse, then the same for right
   res.push(...left.slice(leftTraverse), ...right.slice(rightTraverse));
 
   return res;
