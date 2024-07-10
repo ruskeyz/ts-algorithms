@@ -1,7 +1,7 @@
 /**
  * binarySearch function to search sorted arrays [lo is inclusive, hi) is not inclusive
- * @param {arr: number[], value: number}
- * @returns {number} index in an array
+ * @param arr: number[], value: number
+ * @returns number index in an array
  */
 export default function binarySearch(arr: number[], value: number): number {
   // [lo, hi)

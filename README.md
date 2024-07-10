@@ -32,3 +32,6 @@
 - [Fibonacci](recursion/fibonacci.ts)
 - [Maze Solver](recursion/maze-solver.ts)
 - [Sudoku Solver](recursion/sudoku-solver.ts)
+- [Count Items](recursion/count-items.ts)
+- [Find Max](recursion/find-max.ts)
+- [Sum of integers](recursion/sum.ts)
