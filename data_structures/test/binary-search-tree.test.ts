@@ -3,7 +3,138 @@ import BinarySearchTree from "../binary-search-tree";
 import BinarySearchTreeValidator from "../exercise/bst-validator";
 import BSTHeightCalculator from "../exercise/bst-calculate-height";
 
-describe("Binary Search Tree", () => {
+describe("BinarySearchTree", () => {
+  let bst: BinarySearchTree;
+
+  beforeEach(() => {
+    bst = new BinarySearchTree();
+  });
+
+  it("should insert nodes correctly", () => {
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(7);
+    bst.insert(2);
+    bst.insert(4);
+    bst.insert(6);
+    bst.insert(8);
+
+    expect(bst.traverse()).toEqual([2, 3, 4, 5, 6, 7, 8]);
+  });
+
+  it("should search for nodes correctly", () => {
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(7);
+    bst.insert(2);
+    bst.insert(4);
+    bst.insert(6);
+    bst.insert(8);
+
+    expect(bst.search(5)).toBe(true);
+    expect(bst.search(2)).toBe(true);
+    expect(bst.search(9)).toBe(false);
+  });
+
+  it("should find the minimum value correctly", () => {
+    bst.insert(5);
+    bst.insert(3);
+    bst.insert(7);
+    bst.insert(2);
+    bst.insert(4);
+    bst.insert(6);
+    bst.insert(8);
+
+    expect(bst.findMin()).toBe(2);
+  });
+
+  it("should return the maximum value when all numbers are positive", () => {
+    const numbers = [1, 2, 3, 4, 5];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+    expect(bst.findMax()).toBe(5);
+  });
+
+  it("should return the maximum value when all numbers are negative", () => {
+    const numbers = [-5, -4, -3, -2, -1];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+    expect(bst.findMax()).toBe(-1);
+  });
+
+  it("should return the maximum value when numbers are a mix of positive and negative numbers", () => {
+    const numbers = [-5, 2, -3, 4, -1];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+
+    expect(bst.findMax()).toBe(4);
+  });
+
+  it("should return the maximum value when numbers include zero", () => {
+    const numbers = [0, -2, 3, 0, 5];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+
+    expect(bst.findMax()).toBe(5);
+  });
+
+  it("should return the maximum value when numbers include duplicates", () => {
+    const numbers = [3, 5, 3, 2, 5];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+
+    expect(bst.findMax()).toBe(5);
+  });
+
+  it("should return the maximum value when all numbers are positive", () => {
+    const numbers = [1, 2, 3, 4, 5];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+
+    expect(bst.findMax()).toBe(5);
+  });
+
+  it("should return the maximum value when all numbers are negative", () => {
+    const numbers = [-5, -4, -3, -2, -1];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+
+    expect(bst.findMax()).toBe(-1);
+  });
+
+  it("should return the maximum value when numbers are a mix of positive and negative numbers", () => {
+    const numbers = [-5, 2, -3, 4, -1];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+
+    expect(bst.findMax()).toBe(4);
+  });
+
+  it("should return the maximum value when numbers include zero", () => {
+    const numbers = [0, 2, -3, 4, -1];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+
+    expect(bst.findMax()).toBe(4);
+  });
+
+  it("should return the maximum value when numbers include duplicates", () => {
+    const numbers = [5, 2, 5, 4, 1];
+    for (let i = 0; i < numbers.length; i++) {
+      bst.insert(numbers[i]);
+    }
+
+    expect(bst.findMax()).toBe(5);
+  });
   test("Inserts and traverses the tree according to BST condition", () => {
     const t = new BinarySearchTree();
     t.insert(2);
