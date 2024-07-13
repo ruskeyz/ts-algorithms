@@ -16,12 +16,12 @@ describe("Stack", () => {
 
   test("pop()", () => {
     const s = new Stack();
-    expect(s.pop()).toBeUndefined();
+    expect(s.pop()).toBeNull();
     s.push(100);
     expect(s.length()).toBe(1);
     expect(s.pop()).toBe(100);
     expect(s.length()).toBe(0);
-    expect(s.pop()).toBe(undefined);
+    expect(s.pop()).toBeNull();
   });
 
   test("isEmpty()", () => {
