@@ -14,7 +14,7 @@ function walk(
   curr: Point,
   end: Point,
   seen: boolean[][],
-  path: Point[]
+  path: Point[],
 ): boolean {
   // Base case
   // 1. off the map
@@ -59,7 +59,7 @@ export default function mazeSolver(
   maze: string[],
   wall: string,
   start: Point,
-  end: Point
+  end: Point,
 ): Point[] {
   const seen: boolean[][] = [];
   const path: Point[] = [];

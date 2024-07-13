@@ -1,4 +1,4 @@
-import mazeSolver, { Point } from "../mazeSolver";
+import mazeSolver from "../maze-solver";
 
 test("maze solver", function () {
   const maze = [
@@ -28,6 +28,6 @@ test("maze solver", function () {
     { x: 1, y: 5 },
   ];
   expect(mazeSolver(maze, "x", { x: 10, y: 0 }, { x: 1, y: 5 })).toEqual(
-    mazeResult
+    mazeResult,
   );
 });
