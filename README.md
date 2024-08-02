@@ -1,7 +1,5 @@
 # 📝 Algorithms and data structures implemented in TS with test and documentation
 
-CI to run tests on push and pull requests. Main branch protected.
-
 ## Data structures
 - [Stack](data_structures/stack-list.ts)
 - [Queue](data_structures/queue-list.ts)
