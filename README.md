@@ -1,4 +1,6 @@
 # 📝 Algorithms and data structures implemented in TS with test and documentation
+[![codecov](https://codecov.io/github/ruskeyz/ts-algorithms/graph/badge.svg?token=Y4O479U485)](https://codecov.io/github/ruskeyz/ts-algorithms)
+
 
 ## Data structures
 - [Stack](data_structures/stack-list.ts)
