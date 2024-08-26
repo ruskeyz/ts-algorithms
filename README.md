@@ -37,3 +37,7 @@
 - [Count Items](recursion/count-items.ts)
 - [Find Max](recursion/find-max.ts)
 - [Sum of integers](recursion/sum.ts)
+
+## Greedy algorithms
+- [Roman numerals](greedy/roman-numbers.ts)
+
