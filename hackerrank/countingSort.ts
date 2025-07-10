@@ -5,7 +5,7 @@
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-function countingSort(arr: number[]): number[] {
+export default function countingSort(arr: number[]): number[] {
   // create an empty array with 100 values
   let counted = new Array(100).fill(0);
   // iterate over input, use the value from input as key and increment the value
@@ -30,5 +30,3 @@ function countingSort(arr: number[]): number[] {
   }
   return res;
 }
-
-console.log(countingSort([1, 1, 3, 2, 1]));
