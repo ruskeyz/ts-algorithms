@@ -5,7 +5,7 @@
  * The function accepts STRING s as parameter.
  */
 
-function timeConversion(s: string): string {
+export default function timeConversion(s: string): string {
   // Write your code here
   // Convert string to arr, define hours, minutes, seconds and midnighter
 
@@ -24,7 +24,3 @@ function timeConversion(s: string): string {
   // IF AM -> subtract 12 from hours.
   return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
-
-// console.log(timeConversion("07:05:45PM"));
-// console.log(timeConversion("04:59:59AM"));
-console.log(timeConversion("12:45:54PM"));

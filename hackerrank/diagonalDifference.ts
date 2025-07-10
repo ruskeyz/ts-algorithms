@@ -18,7 +18,7 @@
 // Output Format
 // Return the absolute difference between the sums of the matrix's two diagonals as a single integer.
 
-function diagonalDifference(arr: number[][]): number {
+export default function diagonalDifference(arr: number[][]): number {
   // calculate diagonal length
   const diagonalLength = arr.length;
 
@@ -41,11 +41,3 @@ function diagonalDifference(arr: number[][]): number {
   // calculate absolute
   return Math.abs(leftSum - rightSum);
 }
-
-console.log(
-  diagonalDifference([
-    [1, 2, 3],
-    [4, 5, 6],
-    [9, 8, 9],
-  ]),
-);

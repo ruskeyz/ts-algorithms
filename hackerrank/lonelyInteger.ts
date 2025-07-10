@@ -5,7 +5,7 @@
  * The function accepts INTEGER_ARRAY a as parameter.
  */
 
-function lonelyinteger(a: number[]): number {
+export default function lonelyinteger(a: number[]): number {
   // create a hashmap of occurrences
   // Record<number, number>
   const dict: Record<number, number> = {};
@@ -24,5 +24,3 @@ function lonelyinteger(a: number[]): number {
 
   return Number(resultArr[idx]);
 }
-
-console.log(lonelyinteger([0, 0, 1, 2, 1]));
