@@ -32,24 +32,29 @@ export function buildWordDict(data: string): WordDict {
   return wordDict;
 }
 
-const data: string = readFileSync("shakespeare.txt", "utf-8");
-const wordDict = buildWordDict(data);
+if (require.main === module) {
+  const data: string = readFileSync("shakespeare.txt", "utf-8");
+  const wordDict = buildWordDict(data);
 
-let currWord = "the";
-// repeat the most likely word after the 20 times
-for (let i = 0; i < 20; i++) {
-  // given word, output most likely word
-  let mostLikelyWord = "";
-  let mostLikeWordOccurances = -Infinity;
-  for (const [wordCandidate, wordCandidateOccuranceCount] of Object.entries(
-    wordDict[currWord],
-  )) {
-    //find max occurance
-    if (wordCandidateOccuranceCount >= mostLikeWordOccurances) {
-      mostLikeWordOccurances = wordCandidateOccuranceCount;
-      mostLikelyWord = wordCandidate;
+  let currWord = "the";
+  // repeat the most likely word after the 20 times
+  for (let i = 0; i < 20; i++) {
+    // given word, output most likely word
+    if (!wordDict[currWord]) {
+      break;
     }
+    let mostLikelyWord = "";
+    let mostLikeWordOccurances = -Infinity;
+    for (const [wordCandidate, wordCandidateOccuranceCount] of Object.entries(
+      wordDict[currWord],
+    )) {
+      //find max occurance
+      if (wordCandidateOccuranceCount >= mostLikeWordOccurances) {
+        mostLikeWordOccurances = wordCandidateOccuranceCount;
+        mostLikelyWord = wordCandidate;
+      }
+    }
+    currWord = mostLikelyWord;
+    process.stdout.write(" " + currWord);
   }
-  currWord = mostLikelyWord;
-  process.stdout.write(" " + currWord);
 }
