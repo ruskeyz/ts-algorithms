@@ -34,10 +34,8 @@ for (let i = 0; i < 20; i++) {
   )) {
     //find max occurance
     if (wordCandidateOccuranceCount >= mostLikeWordOccurances) {
-      if (Math.random() > 0.9) {
-        mostLikeWordOccurances = wordCandidateOccuranceCount;
-        mostLikelyWord = wordCandidate;
-      }
+      mostLikeWordOccurances = wordCandidateOccuranceCount;
+      mostLikelyWord = wordCandidate;
     }
   }
   currWord = mostLikelyWord;
