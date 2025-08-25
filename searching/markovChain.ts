@@ -1,27 +1,39 @@
 import { readFileSync } from "fs";
 
-let data: string = readFileSync("shakespeare.txt", "utf-8");
-data = data.toLowerCase();
-data = data
-  .replace(/[^\w\s]/g, " ")
-  .replace(/\s+/g, " ")
-  .trim();
+export type WordDict = Record<string, Record<string, number>>;
 
-const wordsArr = data.split(" ");
+export function buildWordDict(data: string): WordDict {
+  const cleanedData = data
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
-let wordDict: Record<string, Record<string, number>> = {};
+  const wordsArr = cleanedData.split(" ");
 
-for (let index = 0; index < wordsArr.length - 1; index++) {
-  const currWord = wordsArr[index];
-  const nextWord = wordsArr[index + 1];
-  if (!(currWord in wordDict)) {
-    wordDict[currWord] = {};
+  const wordDict: WordDict = {};
+
+  if (wordsArr.length <= 1) {
+    return wordDict;
   }
-  if (!(nextWord in wordDict[currWord])) {
-    wordDict[currWord][nextWord] = 0;
+
+  for (let index = 0; index < wordsArr.length - 1; index++) {
+    const currWord = wordsArr[index];
+    const nextWord = wordsArr[index + 1];
+    if (!(currWord in wordDict)) {
+      wordDict[currWord] = {};
+    }
+    if (!(nextWord in wordDict[currWord])) {
+      wordDict[currWord][nextWord] = 0;
+    }
+    wordDict[currWord][nextWord] += 1;
   }
-  wordDict[currWord][nextWord] += 1;
+
+  return wordDict;
 }
+
+const data: string = readFileSync("shakespeare.txt", "utf-8");
+const wordDict = buildWordDict(data);
 
 let currWord = "the";
 // repeat the most likely word after the 20 times
